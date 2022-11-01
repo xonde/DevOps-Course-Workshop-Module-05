@@ -9,6 +9,6 @@ EXPOSE ${WEBAPP_PORT}
 # The data folder should be shared with the cliapp
 ENV DATA_FOLDER=/opt/chimera/data
 # Mounting a volume automatically creates the target folder, so you can delete this line once that is set up
-RUN mkdir $DATA_FOLDER
+# RUN mkdir $DATA_FOLDER
 RUN mkdir /var/log/chimera
 ENTRYPOINT ["./webapp"]

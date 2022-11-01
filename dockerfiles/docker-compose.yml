@@ -1,0 +1,18 @@
+services:
+  cliapp:
+    build:
+      dockerfile: Dockerfile.cliapp
+      context: .
+    volumes:
+      - chimera-shared-volume:/opt/chimera/data
+
+  webapp:
+    build:
+      dockerfile: Dockerfile.webapp
+      context: .
+    volumes:
+     - chimera-shared-volume:/opt/chimera/data  
+    ports:
+      - 8081:80
+volumes:
+  chimera-shared-volume:
