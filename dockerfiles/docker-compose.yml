@@ -1,0 +1,15 @@
+services:
+  cliapp:
+    build:
+      dockerfile: Dockerfile.cliapp
+      context: .
+
+  webapp:
+    build:
+      dockerfile: Dockerfile.webapp
+      context: .
+    ports:
+      - 8081:80
+
+  chimera-redis:
+    image: redis

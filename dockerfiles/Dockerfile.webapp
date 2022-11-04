@@ -5,10 +5,12 @@ RUN apt-get install -y curl
 RUN curl https://devops-command-line-workshop.s3.eu-west-2.amazonaws.com/webapp --output webapp
 RUN chmod +x webapp
 ENV WEBAPP_PORT=80
+ENV REDIS_HOST=chimera-redis
+ENV REDIS_PORT=6379
 EXPOSE ${WEBAPP_PORT}
 # The data folder should be shared with the cliapp
-ENV DATA_FOLDER=/opt/chimera/data
+# ENV DATA_FOLDER=/opt/chimera/data
 # Mounting a volume automatically creates the target folder, so you can delete this line once that is set up
-RUN mkdir $DATA_FOLDER
+# RUN mkdir $DATA_FOLDER
 RUN mkdir /var/log/chimera
 ENTRYPOINT ["./webapp"]

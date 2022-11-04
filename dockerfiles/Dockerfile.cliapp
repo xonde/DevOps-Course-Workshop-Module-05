@@ -1,11 +1,16 @@
 FROM ubuntu:xenial
 RUN apt-get update
+RUN apt-get install -y curl
 RUN apt-get install -y jq
 WORKDIR /opt/chimera/bin
 RUN curl https://devops-command-line-workshop.s3.eu-west-2.amazonaws.com/cliapp --output cliapp
 RUN chmod +x cliapp
+ENV REDIS_HOST=chimera-redis
+ENV REDIS_PORT=6379
 # The data folder should be shared with the webapp
-ENV DATA_FOLDER=/opt/chimera/data
+# ENV DATA_FOLDER=/opt/chimera/data
 # Mounting a volume automatically creates the target folder, so you can delete this line once that is set up
-RUN mkdir $DATA_FOLDER
+# RUN mkdir $DATA_FOLDER
 RUN mkdir /var/log/chimera
+COPY ./run.sh /opt/chimera
+ENTRYPOINT [ "/opt/chimera/run.sh" ]
